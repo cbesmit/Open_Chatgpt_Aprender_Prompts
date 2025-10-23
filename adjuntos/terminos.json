@@ -1,0 +1,253 @@
+{
+    // Objetivo: gestionar términos para SRS (repaso espaciado) y alimentar temario/evaluaciones.
+    // Si tu herramienta exige JSON estricto, elimina todas las líneas de comentarios (// …) antes de subir.
+    "schema_version": 1, // versión del esquema
+    "version": 1, // incrementa +1 en cada actualización
+    "updated_at": "YYYY-MM-DD", // fecha ISO de la última edición
+    "items": [ // ——— LISTA DE TÉRMINOS (cada uno con SRS) ———
+        {
+            // — Ejemplo 1: CONCEPTO —
+            "id": "K1", // identificador único
+            "tipo": "concepto", // concepto|definicion|formula|procedimiento|acronimo|snippet|flashcard
+            "nombre": "Abstraccion", // evita acentos si tendrás parsers estrictos
+            "descripcion": "Proceso de ocultar detalles para resaltar lo esencial en {TEMA}.",
+            "codigo": "", // opcional (para fórmulas/snippets); deja vacío si no aplica
+            "ejemplos": [ // ejemplos de uso/contexto
+                {
+                    "contexto": "Ingenieria",
+                    "uso": "Separar interfaz de implementacion"
+                },
+                {
+                    "contexto": "Diseno",
+                    "uso": "Modelar solo atributos relevantes"
+                }
+            ],
+            "recursos": [ // materiales de apoyo (obligatorios/opcionales)
+                {
+                    "tipo": "articulo",
+                    "titulo": "Intro a la Abstraccion",
+                    "url": "https://…",
+                    "obligatorio": false
+                }
+            ],
+            "tags": [
+                "basico",
+                "modulo:M1",
+                "conceptual"
+            ], // etiquetas libres (prioridades, módulo, tema)
+            "estado": "pendiente", // pendiente|repasar|aprendido|dificil
+            "proximo_repaso": "YYYY-MM-DD", // próxima fecha de repaso
+            "srs": { // metadatos de repaso espaciado
+                "nivel": 0, // nivel SM-2/SRS (0 nuevo, 1..n)
+                "ultimo_repaso": null, // YYYY-MM-DD
+                "aciertos_consecutivos": 0, // cuántos aciertos seguidos
+                "intervalo_dias": 1, // intervalo actual en días
+                "facilidad": 2.5, // 1.3..2.8 (si usas SM-2) — opcional
+                "lapsos": 0 // cantidad de fallos fuertes
+            },
+            "relacion_temario": { // con qué parte del plan se conecta
+                "modulo_id": "M1",
+                "tareas": [
+                    "T1",
+                    "T2"
+                ],
+                "prioridad": "alta" // alta|media|baja
+            },
+            "notas": "Trafico alto en dudas; priorizar en la clase 1."
+        },
+        {
+            // — Ejemplo 2: FORMULA —
+            "id": "K2",
+            "tipo": "formula",
+            "nombre": "Ley de Ohm",
+            "descripcion": "Relacion entre voltaje (V), corriente (I) y resistencia (R).",
+            "codigo": "V = I * R", // puedes usar LaTeX plano si tu entorno lo soporta
+            "ejemplos": [
+                {
+                    "contexto": "Fisica",
+                    "uso": "Calcular corriente para un resistor dado"
+                }
+            ],
+            "recursos": [
+                {
+                    "tipo": "video",
+                    "titulo": "Ohm en 5 min",
+                    "url": "https://…",
+                    "obligatorio": false
+                }
+            ],
+            "tags": [
+                "intermedio",
+                "modulo:M2",
+                "calculo"
+            ],
+            "estado": "repasar",
+            "proximo_repaso": "YYYY-MM-DD",
+            "srs": {
+                "nivel": 2,
+                "ultimo_repaso": "YYYY-MM-DD",
+                "aciertos_consecutivos": 2,
+                "intervalo_dias": 3,
+                "facilidad": 2.4,
+                "lapsos": 0
+            },
+            "relacion_temario": {
+                "modulo_id": "M2",
+                "tareas": [
+                    "T3"
+                ],
+                "prioridad": "media"
+            },
+            "notas": "Fallo leve en unidades; reforzar ejemplos con SI."
+        },
+        {
+            // — Ejemplo 3: PROCEDIMIENTO —
+            "id": "K3",
+            "tipo": "procedimiento",
+            "nombre": "Gram stain (tincion de Gram)",
+            "descripcion": "Protocolo paso a paso para clasificar bacterias.",
+            "codigo": "Fijar → Tenir → Decolorar → Contratenir", // pasos resumidos
+            "ejemplos": [
+                {
+                    "contexto": "Microbiologia",
+                    "uso": "Distinguir Gram+ y Gram-"
+                }
+            ],
+            "recursos": [
+                {
+                    "tipo": "doc",
+                    "titulo": "Protocolo de laboratorio",
+                    "url": "https://…",
+                    "obligatorio": true
+                }
+            ],
+            "tags": [
+                "clinico",
+                "laboratorio",
+                "modulo:M3"
+            ],
+            "estado": "dificil",
+            "proximo_repaso": "YYYY-MM-DD",
+            "srs": {
+                "nivel": 1,
+                "ultimo_repaso": "YYYY-MM-DD",
+                "aciertos_consecutivos": 0,
+                "intervalo_dias": 1,
+                "facilidad": 1.9,
+                "lapsos": 1
+            },
+            "relacion_temario": {
+                "modulo_id": "M3",
+                "tareas": [
+                    "T4"
+                ],
+                "prioridad": "alta"
+            },
+            "notas": "Reiniciar a 1 dia; incluir recordatorio de bioseguridad."
+        },
+        {
+            // — Ejemplo 4: ACRONIMO —
+            "id": "K4",
+            "tipo": "acronimo",
+            "nombre": "CRUD",
+            "descripcion": "Create, Read, Update, Delete.",
+            "codigo": "",
+            "ejemplos": [
+                {
+                    "contexto": "Sistemas",
+                    "uso": "Operaciones basicas en almacenamiento de datos"
+                }
+            ],
+            "recursos": [],
+            "tags": [
+                "basico",
+                "modulo:M1"
+            ],
+            "estado": "aprendido",
+            "proximo_repaso": "YYYY-MM-DD",
+            "srs": {
+                "nivel": 3,
+                "ultimo_repaso": "YYYY-MM-DD",
+                "aciertos_consecutivos": 4,
+                "intervalo_dias": 21,
+                "facilidad": 2.6,
+                "lapsos": 0
+            },
+            "relacion_temario": {
+                "modulo_id": "M1",
+                "tareas": [
+                    "T2"
+                ],
+                "prioridad": "baja"
+            },
+            "notas": "Sube a 60d en el proximo acierto."
+        },
+        {
+            // — Ejemplo 5: FLASHCARD —
+            "id": "K5",
+            "tipo": "flashcard",
+            "nombre": "¿Que es MCP?",
+            "descripcion": "Protocolo para integrar contexto entre herramientas y modelos.",
+            "codigo": "Q: ¿Que es MCP? || A: Protocolo de Model Context.",
+            "ejemplos": [],
+            "recursos": [],
+            "tags": [
+                "repaso_rapido",
+                "modulo:M1"
+            ],
+            "estado": "repasar",
+            "proximo_repaso": "YYYY-MM-DD",
+            "srs": {
+                "nivel": 1,
+                "ultimo_repaso": "YYYY-MM-DD",
+                "aciertos_consecutivos": 1,
+                "intervalo_dias": 3,
+                "facilidad": 2.3,
+                "lapsos": 0
+            },
+            "relacion_temario": {
+                "modulo_id": "M1",
+                "tareas": [],
+                "prioridad": "media"
+            },
+            "notas": "Usar en warm-up de clase."
+        }
+    ],
+    "reglas_srs": { // política SRS por defecto (puedes ajustar)
+        "intervalos_base_dias": [
+            1,
+            3,
+            7,
+            21,
+            60
+        ],
+        "cambios_estado": {
+            "aprendido": "3-4 aciertos consecutivos → subir intervalo; ultimo salto a 60d",
+            "repasar": "fallo leve → bajar 1 nivel y acortar intervalo",
+            "dificil": "fallo fuerte → reiniciar a 1d y tag 'dificil'"
+        }
+    },
+    "resumen": { // métricas agregadas del repositorio de términos
+        "total_items": 5, // actualiza al imprimir
+        "pendientes_hoy": 0, // items con proximo_repaso = hoy
+        "vencidos": 0, // items con proximo_repaso < hoy
+        "por_estado": {
+            "pendiente": 1,
+            "repasar": 2,
+            "aprendido": 1,
+            "dificil": 1
+        }
+    },
+    "historial": [ // bitácora auditada (append-only)
+        {
+            "fecha": "YYYY-MM-DD",
+            "version": 1,
+            "tipo": "alta|repaso|edicion|baja",
+            "items_afectados": [
+                "K1",
+                "K2"
+            ],
+            "resumen": "Altas iniciales y primer repaso.",
+        }
+    ]
+}
