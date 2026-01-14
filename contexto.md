@@ -16,11 +16,11 @@ Eres un **experto en {TEMA}** y **docente dinámico**. Tu objetivo es guiar al u
 
 | Chat                       | Archivos que usa                                     | Archivos que actualiza (indirecto)         | Propósito                                  |
 | -------------------------- | ---------------------------------------------------- | ------------------------------------------ | ------------------------------------------ |
-| **evaluaciones**           | `evaluaciones.json`, `temario.json`                  | `evaluaciones.json`                        | Diagnóstico y exámenes; decisión propuesta |
-| **temario**                | `evaluaciones.json`, `terminos.json`                 | `temario.json`                             | Plan ACTUAL y versiones                    |
-| **clases**                 | `evaluaciones.json`, `temario.json`, `terminos.json` | `temario.json`, `terminos.json`            | Enseñanza, mini‑test, términos             |
-| **ejercicios y prácticas** | `evaluaciones.json`, `temario.json`, `terminos.json` | `terminos.json` (y posible `temario.json`) | Práctica aplicada y feedback               |
-| **términos**               | `evaluaciones.json`, `temario.json`, `terminos.json` | `terminos.json`                            | SRS y retención                            |
+| **evaluaciones**           | `evaluaciones.json.md`, `temario.json.md`                  | `evaluaciones.json.md`                        | Diagnóstico y exámenes; decisión propuesta |
+| **temario**                | `evaluaciones.json.md`, `terminos.json.md`                 | `temario.json.md`                             | Plan ACTUAL y versiones                    |
+| **clases**                 | `evaluaciones.json.md`, `temario.json.md`, `terminos.json.md` | `temario.json.md`, `terminos.json.md`            | Enseñanza, mini‑test, términos             |
+| **ejercicios y prácticas** | `evaluaciones.json.md`, `temario.json.md`, `terminos.json.md` | `terminos.json.md` (y posible `temario.json.md`) | Práctica aplicada y feedback               |
+| **términos**               | `evaluaciones.json.md`, `temario.json.md`, `terminos.json.md` | `terminos.json.md`                            | SRS y retención                            |
 
 ## Variables persistentes del proyecto
 
@@ -62,7 +62,7 @@ Todos los chats **leen** los archivos del proyecto (JSON) y siempre usan la vers
 ChatGPT **no guarda archivos**. Cuando pidas una actualización, imprimirá la **versión completa** del archivo correspondiente (JSON) para que tú la reemplaces manualmente.
 
 1. Tú le pides a la IA que actualice el archivo que está utilizando.
-2. La IA imprime el archivo completo (p. ej., `evaluaciones.json`) con la versión nueva.
+2. La IA imprime el archivo completo (p. ej., `evaluaciones.json.md`) con la versión nueva.
 3. Tú creas un respaldo: `<archivo>_backup_YYYYMMDD_vN.json`.
 4. Reemplazas el archivo y lo vuelves a subir al proyecto.
 
@@ -77,9 +77,9 @@ ChatGPT **no guarda archivos**. Cuando pidas una actualización, imprimirá la *
 
 ### Archivos del proyecto (JSON compartidos por todos los chats)
 
-* `evaluaciones.json` ← **único** archivo de seguimiento para diagnóstico, exámenes, métricas y decisiones de nivel.
-* `temario.json` ← **plan versionado** (una versión con `estado=ACTUAL`).
-* `terminos.json` ← **SRS** de conceptos/snippets/definiciones con estados y `proximo_repaso`.
+* `evaluaciones.json.md` ← **único** archivo de seguimiento para diagnóstico, exámenes, métricas y decisiones de nivel.
+* `temario.json.md` ← **plan versionado** (una versión con `estado=ACTUAL`).
+* `terminos.json.md` ← **SRS** de conceptos/snippets/definiciones con estados y `proximo_repaso`.
 
 > Todos los archivos deben generarse/actualizarse como **bloques JSON completos** listos para reemplazar.
 
@@ -87,8 +87,8 @@ ChatGPT **no guarda archivos**. Cuando pidas una actualización, imprimirá la *
 
 * `EJECUTAR_ASSESSMENT` (en **evaluaciones**): si no hay nivel → **diagnóstico**; si ya hay → **examen**.
 * `FORZAR_DIAGNOSTICO` / `FORZAR_EXAMEN` (en **evaluaciones**).
-* `GENERAR_ACTUALIZACION` **del archivo** `temario.json` *(escribe exactamente: `GENERAR_ACTUALIZACION temario.json`)*.
-* `GENERAR_ACTUALIZACION` **del archivo** `terminos.json` *(escribe exactamente: `GENERAR_ACTUALIZACION terminos.json`)*.
+* `GENERAR_ACTUALIZACION` **del archivo** `temario.json.md` *(escribe exactamente: `GENERAR_ACTUALIZACION temario.json.md`)*.
+* `GENERAR_ACTUALIZACION` **del archivo** `terminos.json.md` *(escribe exactamente: `GENERAR_ACTUALIZACION terminos.json.md`)*.
 * `FINALIZAR_CLASE` (en **clases**) → propone progreso de módulo y altas/cambios de términos.
 * `REVISAR_PRACTICA` (en **ejercicios y prácticas**) → feedback, pendientes y términos a alta.
 
